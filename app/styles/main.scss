@@ -1,21 +1,20 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
+@import "_customVariables";
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
 $background-color: #474747;
 
 body {
-  padding-top: 50px;
+  padding-top: 200px;
   background-color: $background-color;
   color: $gray_light;
 }
 
 .table-dark {
-  background-color: $gray-darker;
   color: $gray_light;
 }
-
 .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
   border: none;
 }
