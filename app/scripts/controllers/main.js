@@ -9,20 +9,24 @@
  */
 angular.module('mulunguApp')
   .controller('JobsCtrl', function () {
-    this.job = {
+    var vm = this;
+    vm.status = ['READY', 'WAITING', 'SUCCESS', 'FAILED'];
+    vm.job = {
       id: '53de430e-2f0a-4931-9c49-6871210c1f4b',
       text: 'job1',
-      tasks: [
-        {
-          id: 'TaskNumber0',
-          text: 'Task number zero',
-          taskState: 'READY'
-        },
-        {
-          id: 'TaskNumber1',
-          text: 'Task number one',
-          taskState: 'READY'
-        }
-      ]
+      tasks: []
     };
+    var add = function() {
+      var number = Math.floor(Math.random() * (100 - 1));
+      var status = Math.floor(Math.random() * 4);
+      var task = {
+        id: 'Task'+number,
+        text: 'Description for task number '+number,
+        taskState: vm.status[status]
+      };
+      vm.job.tasks.push(task);
+    };
+    for (var i=0; i<10;i++) {
+      add();
+    }
   });

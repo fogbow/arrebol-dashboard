@@ -5,7 +5,7 @@
       <label for="search-input" class="sr-only">Pesquisar por tarefa</label>
       <div class="input-group">
         <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-        <input type="text" id="search-input" class="form-control">
+        <input type="text" id="search-input" ng-model="search" class="form-control">
       </div>
     </div>
   </div>
@@ -19,8 +19,8 @@
     </div>
   </div>
 </div>
-<table class="table table-dark">
-  <tr ng-repeat="task in jobs.job.tasks">
+<table class="table table-hover table-dark">
+  <tr ng-repeat="task in jobs.job.tasks | filter:search">
     <td>
       {{task.id}}
     </td>
