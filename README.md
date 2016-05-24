@@ -4,16 +4,22 @@ Statement Driven Executor and Scheduler.
 
 ## Build & development
 
-### Requirements
+### System requirements
 
-Install `yo`, `grunt-cli`, `bower`, `generator-angular`, `generator-karma` and `compass`:
+Install yo, grunt-cli, bower, generator-angular, generator-karma and compass globally:
+
 ```
 npm install -g grunt-cli bower yo generator-karma generator-angular
-```
-```
 gem install compass
 ```
-### Run
+### Build and run
+
+Go to project folder and install project dependencies:
+
+```
+npm install
+bower install
+```
 
 Run `grunt` for building and `grunt serve` for preview.
 
