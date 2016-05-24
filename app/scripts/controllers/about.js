@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name mulunguApp.controller:AboutCtrl
+ * @name ArrebolApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the mulunguApp
+ * Controller of the ArrebolApp
  */
-angular.module('mulunguApp')
+angular.module('ArrebolApp')
   .controller('AboutCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',

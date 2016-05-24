@@ -371,7 +371,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       dist: {
         options: {
-          module: 'mulunguApp',
+          module: 'ArrebolApp',
           htmlmin: '<%= htmlmin.dist.options %>',
           usemin: 'scripts/scripts.js'
         },

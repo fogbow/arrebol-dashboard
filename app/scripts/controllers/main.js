@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name mulunguApp.controller:MainCtrl
+ * @name ArrebolApp.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the mulunguApp
+ * Controller of the ArrebolApp
  */
-angular.module('mulunguApp')
+angular.module('ArrebolApp')
   .controller('JobsCtrl', function () {
     var vm = this;
     vm.status = ['READY', 'WAITING', 'SUCCESS', 'FAILED'];

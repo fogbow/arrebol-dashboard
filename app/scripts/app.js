@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name mulunguApp
+ * @name ArrebolApp
  * @description
- * # mulunguApp
+ * # ArrebolApp
  *
  * Main module of the application.
  */
 angular
-  .module('mulunguApp', [
+  .module('ArrebolApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
