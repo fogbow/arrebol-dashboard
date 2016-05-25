@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-sm-8">
+    <div class="job-title">
+      {{Tasks.job.name}}
+    </div>
+  </div>
+  <div class="col-sm-4">
+
+    <div class="form-group has-feedback">
+      <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputPesquisarStatus" placeholder="Pesquisar..." ng-model="Tasks.search">
+      <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+      <span id="inputPesquisarStatus" class="sr-only">Termo da pesquisa</span>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="tasks" ng-show="Tasks.job.tasks.length">
+
+  <div class="task" ng-repeat="task in Tasks.job.tasks | filter:Tasks.search">
+    <div class="task-status" ng-class="'task-status-'.concat(task.taskState.toLowerCase())">{{task.taskState}}</div>
+    {{task.text}}
+  </div>
+
+</div>

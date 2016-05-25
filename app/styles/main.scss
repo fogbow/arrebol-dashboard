@@ -1,23 +1,137 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+@import "_customVariables";
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
 $background-color: #FFFFFF;
-
+$list-group-margin: 5px !default;
+html {
+  height: 100%;
+}
 body {
+	height: 100%;
   padding-top: 40px;
   background-color: $background-color;
-  color: $gray_light;
-}
-
-.table-dark {
-  color: $gray_light;
-}
-.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
-  border: none;
+  color: $gray-base;
 }
 
 .logo {
   width: 100%;
+  margin-bottom: 40px;
+}
+
+.page-wrapper {
+	min-height: 100%;
+	height: auto !important; /* This line and the next line are not necessary unless you need IE6 support */
+	height: 100%;
+	margin-bottom: -50px; /* the bottom margin is the negative value of the footer's height */
+  padding-bottom: 40px;
+}
+
+.page-wrapper:after {
+  content: "";
+  display: block;
+    height: 50px;
+}
+footer {
+  height: 50px;
+  padding: 20px;
+  color: #FFF;
+  text-align: center;
+  font-size: $font-size-small;
+  background: #e3a94b;
+  background: -moz-linear-gradient(left, #e3a94b 0%, #cc5b4f 100%);
+  background: -webkit-linear-gradient(left, #e3a94b 0%,#cc5b4f 100%);
+  background: linear-gradient(to right, #e3a94b 0%,#cc5b4f 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3a94b', endColorstr='#cc5b4f',GradientType=1 );
+
+  a {
+    &:link,
+    &:visited {
+      color: #FFF;
+      font-weight: bold;
+    }
+  }
+}
+
+.task-link {
+
+  &:link,
+  &:visited {
+    color: #FFF;
+  }
+  &:active,
+  &:hover {
+    color: #FFF;
+    text-decoration: none;
+  }
+}
+
+.tasks {
+  margin-top: 40px;
+}
+
+.task {
+  background-color: $gray-dark;
+  border: 1px solid $gray-dark;
+  padding: 10px 15px;
+  margin-bottom: 5px;
+  border-radius: $border-radius-base;
+  transition: transform 0.25s;
+  color: #FFF;
+}
+
+.job {
+  &:hover {
+    background-color: #000;
+    transform: scaleX(1.05);
+  }
+}
+
+.task-status {
+  float: left;
+  width: 110px;
+  padding: 11px 15px 11px 20px;
+  margin: -11px 15px 0 -17px;
+  border-top-left-radius: $border-radius-base;
+  border-bottom-left-radius: $border-radius-base;
+  color: #FFF;
+}
+.task-status-default {
+  width: 180px;
+  border-right: solid 2px $gray-light;
+}
+.task-status-ready {
+  background-color: $brand-success;
+}
+.task-status-waiting {
+  background-color: $brand-warning;
+}
+.task-status-failed {
+  background-color: $brand-danger;
+}
+.task-status-queued {
+  background-color: $brand-info;
+}
+
+.job-title {
+  background-color: #000;
+  border: 1px solid #000;
+  padding: 10px 15px 10px 100px;
+  margin-left: -100px;
+  margin-bottom: 5px;
+  border-radius: $border-radius-base;
+  color: #FFF;
+  font-weight: bold;
+}
+
+.form-control {
+  height: 42px;
+  padding: 6px 12px 6px 20px;
+}
+
+.form-control-feedback {
+  height: 40px;
+  line-height: 40px;
 }

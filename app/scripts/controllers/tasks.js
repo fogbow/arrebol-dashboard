@@ -2,18 +2,18 @@
 
 /**
  * @ngdoc function
- * @name ArrebolApp.controller:MainCtrl
+ * @name ArrebolApp.controller:TaskCtrl
  * @description
- * # MainCtrl
+ * # TaskCtrl
  * Controller of the ArrebolApp
  */
 angular.module('ArrebolApp')
-  .controller('MainCtrl', function ($http) {
+  .controller('TasksCtrl', function ($http) {
     var vm = this;
-    vm.jobs = [];
+    vm.job = {};
     vm.search = "";
-    $http.get('scripts/jobs.json')
+    $http.get('scripts/tasks.json')
       .success(function(data) {
-        vm.jobs = data;
+        vm.job = data;
       });
   });
