@@ -1,42 +1,14 @@
-[
-  {
-    "name": "É por sua conta e risco",
-    "readytasks": 2,
-    "id":"4a98e288-e416-45c9-8f92-aed081fff49a"
-  },
-  {
-    "name": "Ma vejam só, vejam só.",
-    "readytasks": 6,
-    "id":"4a98e288-e416-45c9-8f92-aed081fff49a"
-  },
-  {
-    "name": "Eu não queria perguntar isso publicamente, mas.",
-    "readytasks": 8,
-    "id":"4a98e288-e416-45c9-8f92-aed081fff49a"
-  },
-  {
-    "name": "O prêmio é em barras de ouro, que vale mais do que dinheiro.",
-    "readytasks": 25,
-    "id":"4a98e288-e416-45c9-8f92-aed081fff49a"
-  },
-  {
-    "name": "Mah roda a roduamm. Mah.",
-    "readytasks": 15,
-    "id":"4a98e288-e416-45c9-8f92-aed081fff49a"
-  },
-  {
-    "name": "Ma! Ao adquirir o carnê.",
-    "readytasks": 12,
-    "id":"4a98e288-e416-45c9-8f92-aed081fff49a"
-  },
-  {
-    "name": "Ha hai. Bem boladoam, bem.",
-    "readytasks": 869,
-    "id":"4a98e288-e416-45c9-8f92-aed081fff49a"
-  },
-  {
-    "name": "Ma você, topa ou não topamm. Ma quem quer dinheiroam?",
-    "readytasks": 456,
-    "id":"4a98e288-e416-45c9-8f92-aed081fff49a"
-  }
-]
+{
+  "Jobs": [
+    {
+      "name": "primes2",
+      "readytasks": 1,
+      "id": "234375e8-61ff-4ccd-bedf-9ec6a537e537"
+    },
+    {
+      "name": "primes",
+      "readytasks": 3,
+      "id": "a723eedb-3255-4b92-b09d-33ea1ed5fd81"
+    }
+  ]
+}

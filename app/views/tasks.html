@@ -15,12 +15,11 @@
   </div>
 </div>
 
+<div class="tasks" ng-show="Tasks.job.Tasks.length">
 
-<div class="tasks" ng-show="Tasks.job.tasks.length">
-
-  <div class="task" ng-repeat="task in Tasks.job.tasks | filter:Tasks.search">
-    <div class="task-status" ng-class="'task-status-'.concat(task.taskState.toLowerCase())">{{task.taskState}}</div>
-    {{task.text}}
+  <div class="task" ng-repeat="task in Tasks.job.Tasks | filter:Tasks.search">
+    <div class="task-status" ng-class="'task-status-'.concat(task.state.toLowerCase())">{{task.state}}</div>
+    {{task.taskid}}
   </div>
 
 </div>

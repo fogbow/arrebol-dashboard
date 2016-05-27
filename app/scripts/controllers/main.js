@@ -14,6 +14,6 @@ angular.module('ArrebolApp')
     vm.search = "";
     $http.get('scripts/jobs.json')
       .success(function(data) {
-        vm.jobs = data;
+        vm.jobs = data.Jobs;
       });
   });
