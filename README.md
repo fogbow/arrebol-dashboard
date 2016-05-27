@@ -1,4 +1,4 @@
-# mulungu
+# Arrebol Dashboard
 
 Statement Driven Executor and Scheduler.
 
