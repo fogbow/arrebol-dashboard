@@ -13,7 +13,7 @@ angular.module('ArrebolApp')
     vm.job = {};
     vm.search = "";
     vm.jobId = $routeParams.job;
-    $http.get('scripts/tasks.json')
+    $http.get("http://web.cloud.lsd.ufcg.edu.br:42020/api/arrebol/job/"+vm.jobId)
       .success(function(data) {
         vm.job = data;
       });
