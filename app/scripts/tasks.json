@@ -16,12 +16,12 @@
       {
         "id": "TaskNumber1",
         "text": "Another task with friendly name",
-        "taskState": "WAITING"
+        "taskState": "RUNNING"
       },
       {
         "id": "TaskNumber1",
         "text": "Another task with friendly name",
-        "taskState": "QUEUED"
+        "taskState": "COMPLETED"
       },
       {
         "id": "TaskNumber1",
@@ -46,7 +46,7 @@
       {
         "id": "TaskNumber1",
         "text": "Another task with friendly name",
-        "taskState": "WAITING"
+        "taskState": "RUNNING"
       },
       {
         "id": "TaskNumber1",

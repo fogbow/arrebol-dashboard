@@ -103,16 +103,16 @@ footer {
   border-right: solid 2px $gray-light;
 }
 .task-status-ready {
-  background-color: $brand-success;
+  background-color: $brand-info;
 }
-.task-status-waiting {
+.task-status-running {
   background-color: $brand-warning;
 }
 .task-status-failed {
   background-color: $brand-danger;
 }
-.task-status-queued {
-  background-color: $brand-info;
+.task-status-completed {
+  background-color: $brand-success;
 }
 
 .job-title {
