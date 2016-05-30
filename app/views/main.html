@@ -14,7 +14,7 @@
 
   <a href="#/tasks/{{job.id}}" class="task-link" ng-repeat="job in Jobs.jobs | filter:Jobs.search">
     <div class="task job">
-      <div class="task-status task-status-default">{{job.readytasks}} tarefas prontas</div>
+      <div class="task-status task-status-default">{{job.readytasks}} ready tasks</div>
       {{(job.name) ? job.name : job.id}}
     </div>
   </a>
