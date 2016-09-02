@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3">
+    <div class="job-title">
+      Login:
+    </div>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="username">Username: </label>
+        <input type="text" class="form-control" id="username" ng-model="Login.username" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label for="privateKey">Private Key File (RSA format): </label>
+        <input type="file" id="privateKey" name="privateKey" ng-model="Login.privateKey">
+        <p class="help-block">Select your private key file in RSA format.</p>
+      </div>
+      <button type="button" class="btn btn-default" ng-click="Login.doLogin()">Sign in</button>
+    </form>
+  </div>
+</div>
