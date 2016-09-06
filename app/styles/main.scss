@@ -118,6 +118,16 @@ footer {
   background-color: $brand-success;
 }
 
+.task-actions {
+  float: right;
+  padding: 6px;
+  margin: -11px 15px 0 -17px;
+  border-top-left-radius: $border-radius-base;
+  border-bottom-left-radius: $border-radius-base;
+  color: #FFF;
+  font-weight: bold;
+}
+
 .job-title {
   background-color: #000;
   border: 1px solid #000;

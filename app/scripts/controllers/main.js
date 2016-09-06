@@ -12,6 +12,29 @@ angular.module('ArrebolApp')
     var vm = this;
     vm.jobs = [];
     vm.search = '';
+    vm.stopJob = function(jobID) {
+      if (window.confirm('Do you want to stop the job ' + jobID + ' ?')) {
+        $http.get('http://arrebol/api/arrebol/nonce')
+        .success(function(nonce) {
+          var username = sessionStorage.loggedUser;
+          var privateKey = sessionStorage.privateKey;
+          /*global RSAKey */
+          var rsa = new RSAKey();
+          rsa.readPrivateKeyFromPEMString(privateKey);
+          var hash = rsa.signString(username + nonce, 'sha1');
+          hash = hex2a(hash);
+          hash = window.btoa(hash);
+          $http.delete('http://arrebol/api/arrebol/job/' + jobID, {headers: { 'X-auth-nonce': nonce, 'X-auth-username': username, 'X-auth-hash': hash } })
+          .success(function(data) {
+            if (data === jobID) {
+              document.getElementById('container-' + jobID).remove();
+            }
+          }).error(function (error) {
+            console.log(error);
+          });
+        });
+      }
+    };
     $http.get('http://arrebol/api/arrebol/nonce')
       .success(function(nonce) {
         var username = sessionStorage.loggedUser;
