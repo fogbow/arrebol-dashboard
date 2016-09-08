@@ -17,7 +17,6 @@
       <div class="task-status task-status-default">{{job.readytasks}} ready tasks</div>
       {{(job.name) ? job.name : job.id}}
     </a>
-    <div class="task-actions"><button class="btn btn-sm btn-danger" ng-click="Jobs.stopJob(job.id);">Stop</button></div>
+    <div class="task-actions"><button class="btn btn-sm" ng-click="Jobs.stopJob(job.id);">Stop</button></div>
   </div>
-
 </div>

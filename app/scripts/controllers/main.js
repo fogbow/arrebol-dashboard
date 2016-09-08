@@ -8,13 +8,13 @@
  * Controller of the ArrebolApp
  */
 angular.module('ArrebolApp')
-  .controller('MainCtrl', ['$http', 'hex2a', function ($http, hex2a) {
+  .controller('MainCtrl', ['$http', 'hex2a', 'arrebolConfig', function ($http, hex2a, arrebolConfig) {
     var vm = this;
     vm.jobs = [];
     vm.search = '';
     vm.stopJob = function(jobID) {
       if (window.confirm('Do you want to stop the job ' + jobID + ' ?')) {
-        $http.get('http://arrebol/api/arrebol/nonce')
+        $http.get(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/nonce')
         .success(function(nonce) {
           var username = sessionStorage.loggedUser;
           var privateKey = sessionStorage.privateKey;
@@ -24,7 +24,7 @@ angular.module('ArrebolApp')
           var hash = rsa.signString(username + nonce, 'sha1');
           hash = hex2a(hash);
           hash = window.btoa(hash);
-          $http.delete('http://arrebol/api/arrebol/job/' + jobID, {headers: { 'X-auth-nonce': nonce, 'X-auth-username': username, 'X-auth-hash': hash } })
+          $http.delete(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/job/' + jobID, {headers: { 'X-auth-nonce': nonce, 'X-auth-username': username, 'X-auth-hash': hash } })
           .success(function(data) {
             if (data === jobID) {
               document.getElementById('container-' + jobID).remove();
@@ -35,7 +35,7 @@ angular.module('ArrebolApp')
         });
       }
     };
-    $http.get('http://arrebol/api/arrebol/nonce')
+    $http.get(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/nonce')
       .success(function(nonce) {
         var username = sessionStorage.loggedUser;
         var privateKey = sessionStorage.privateKey;
@@ -45,7 +45,7 @@ angular.module('ArrebolApp')
         var hash = rsa.signString(username + nonce, 'sha1');
         hash = hex2a(hash);
         hash = window.btoa(hash);
-        $http.get('http://arrebol/api/arrebol/job', {headers: { 'X-auth-nonce': nonce, 'X-auth-username': username, 'X-auth-hash': hash } })
+        $http.get(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/job', {headers: { 'X-auth-nonce': nonce, 'X-auth-username': username, 'X-auth-hash': hash } })
 	      .success(function(data) {
 	        vm.jobs = data.Jobs;
 	      }).error(function (error) {
