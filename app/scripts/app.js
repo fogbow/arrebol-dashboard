@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'toastr'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -42,7 +43,7 @@ angular
     $rootScope.$on( '$routeChangeStart', function(event, next) {
       var loggedUser = false;
       if (typeof(Storage) !== 'undefined') {
-        if (sessionStorage.loggedUser && sessionStorage.privateKey) {
+        if (sessionStorage.loggedUser && sessionStorage.loggedPassword) {
           loggedUser = true;
         }
       }

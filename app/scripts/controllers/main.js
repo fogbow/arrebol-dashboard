@@ -8,48 +8,37 @@
  * Controller of the ArrebolApp
  */
 angular.module('ArrebolApp')
-  .controller('MainCtrl', ['$http', 'hex2a', 'arrebolConfig', function ($http, hex2a, arrebolConfig) {
+  .controller('MainCtrl', ['$http', 'hex2a', 'arrebolConfig', 'toastr', 'ArrebolApi', function ($http, hex2a, arrebolConfig, toastr, ArrebolApi) {
     var vm = this;
     vm.jobs = [];
     vm.search = '';
+    vm.loggedUser = '';
+    vm.loggedPassword = '';
+    vm.authType = '';
+    if (typeof(Storage) !== 'undefined') {
+      vm.authType = sessionStorage.authType;
+      vm.loggedUser = sessionStorage.loggedUser;
+      vm.loggedPassword = sessionStorage.loggedPassword;
+    }
+
     vm.stopJob = function(jobID) {
       if (window.confirm('Do you want to stop the job ' + jobID + ' ?')) {
-        $http.get(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/nonce')
-        .success(function(nonce) {
-          var username = sessionStorage.loggedUser;
-          var privateKey = sessionStorage.privateKey;
-          /*global RSAKey */
-          var rsa = new RSAKey();
-          rsa.readPrivateKeyFromPEMString(privateKey);
-          var hash = rsa.signString(username + nonce, 'sha1');
-          hash = hex2a(hash);
-          hash = window.btoa(hash);
-          $http.delete(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/job/' + jobID, {headers: { 'X-auth-nonce': nonce, 'X-auth-username': username, 'X-auth-hash': hash } })
-          .success(function(data) {
-            if (data === jobID) {
-              document.getElementById('container-' + jobID).remove();
-            }
-          }).error(function (error) {
-            console.log(error);
-          });
+        ArrebolApi.deleteJob(jobID, vm.authType, vm.loggedUser, vm.loggedPassword, function (data) {
+          if (data === jobID) {
+            toastr.success('The job ID ' + jobID + ' was stopped.', 'Job stopped');
+            document.getElementById('container-' + jobID).remove();
+          }
+        }, function (error) {
+          toastr.error('Error code: ' + error.code + ', Description: ' + error.description, 'Error while trying to stop job ID: ' + jobID + '.');
         });
       }
     };
-    $http.get(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/nonce')
-      .success(function(nonce) {
-        var username = sessionStorage.loggedUser;
-        var privateKey = sessionStorage.privateKey;
-        /*global RSAKey */
-        var rsa = new RSAKey();
-        rsa.readPrivateKeyFromPEMString(privateKey);
-        var hash = rsa.signString(username + nonce, 'sha1');
-        hash = hex2a(hash);
-        hash = window.btoa(hash);
-        $http.get(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/job', {headers: { 'X-auth-nonce': nonce, 'X-auth-username': username, 'X-auth-hash': hash } })
-	      .success(function(data) {
-	        vm.jobs = data.Jobs;
-	      }).error(function (error) {
-          console.log(error);
-        });
-      });
+    
+    ArrebolApi.getJobs(vm.authType, vm.loggedUser, vm.loggedPassword, function(data) {
+      vm.jobs = data.Jobs;
+      toastr.info(data.Jobs.length + ' jobs found. ', 'Jobs list updated.');
+    }, function(error) {
+      toastr.error('Error code: ' + error.code + ', Description: ' + error.description, 'Error while trying to fetch jobs.');
+    });
+    
   }]);

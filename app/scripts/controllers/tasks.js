@@ -8,24 +8,24 @@
  * Controller of the ArrebolApp
  */
 angular.module('ArrebolApp')
-  .controller('TasksCtrl', function ($http, $routeParams, hex2a, arrebolConfig) {
+  .controller('TasksCtrl', function ($http, $routeParams, hex2a, arrebolConfig, toastr, ArrebolApi) {
     var vm = this;
-    vm.job = {};
+    vm.jobs = [];
     vm.search = '';
+    vm.loggedUser = '';
+    vm.loggedPassword = '';
+    vm.authType = '';
     vm.jobId = $routeParams.job;
-    $http.get(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/nonce')
-      .success(function(nonce) {
-        var username = sessionStorage.loggedUser;
-        var privateKey = sessionStorage.privateKey;
-        /*global RSAKey */
-        var rsa = new RSAKey();
-        rsa.readPrivateKeyFromPEMString(privateKey);
-        var hash = rsa.signString(username + nonce, 'sha1');
-        hash = hex2a(hash);
-        hash = window.btoa(hash);
-        $http.get(arrebolConfig.arrebolServiceBaseUrl + '/arrebol/job/' + vm.jobId, {headers: { 'X-auth-nonce': nonce, 'X-auth-username': username, 'X-auth-hash': hash } })
-        .success(function(data) {
-          vm.job = data;
-        });
-      });
+
+    if (typeof(Storage) !== 'undefined') {
+      vm.authType = sessionStorage.authType;
+      vm.loggedUser = sessionStorage.loggedUser;
+      vm.loggedPassword = sessionStorage.loggedPassword;
+    }
+
+    ArrebolApi.getJob(vm.jobId, vm.authType, vm.loggedUser, vm.loggedPassword, function(data) {
+      vm.job = data;
+    }, function(error) {
+      toastr.error('Error code: ' + error.code + ', Description: ' + error.description, 'Error while trying to fetch tasks of job ID: ' + vm.jobId + '.');
+    });
   });

@@ -1,9 +1,6 @@
 <div class="row">
   <div class="col-sm-6 col-sm-offset-3">
-    <div class="job-title">
-      Login:
-    </div>
-    <form id="loginForm">
+    <form id="loginForm" class="hideDom commonauth">
       <div class="form-group">
         <label for="username">Username: </label>
         <input type="text" class="form-control" id="username" ng-model="Login.username" placeholder="Username">
@@ -12,6 +9,18 @@
         <label for="privateKey">Private Key File (RSA format): </label>
         <input type="file" id="privateKey" name="privateKey" ng-model="Login.privateKey">
         <p class="help-block">Select your private key file in RSA format.</p>
+      </div>
+      <button type="button" class="btn btn-default" ng-click="Login.doLogin()">Sign in</button>
+    </form>
+
+    <form id="loginFormLDAP" class="hideDom ldapauth">
+      <div class="form-group">
+        <label for="username">LDAP Username: </label>
+        <input type="text" class="form-control" id="ldapUsername" ng-model="Login.ldapUsername" placeholder="LDAP Username">
+      </div>
+      <div class="form-group">
+        <label for="ldapPassword">LDAP Password: </label>
+        <input type="password" class="form-control" id="ldapPassword" ng-model="Login.ldapPassword" placeholder="LDAP Password">
       </div>
       <button type="button" class="btn btn-default" ng-click="Login.doLogin()">Sign in</button>
     </form>
