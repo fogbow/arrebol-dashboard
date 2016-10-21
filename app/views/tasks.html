@@ -18,7 +18,7 @@
 <div class="tasks" ng-show="Tasks.job.Tasks.length">
 
   <div class="task" ng-repeat="task in Tasks.job.Tasks | filter:Tasks.search">
-    <div class="task-status" ng-class="'task-status-'.concat(task.state.toLowerCase())">{{task.state}}</div>
+    <div class="task-status" ng-class="task.sccStyle">{{task.state}}</div>
     {{task.taskid}}
   </div>
 

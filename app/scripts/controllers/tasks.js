@@ -25,6 +25,25 @@ angular.module('ArrebolApp')
 
     ArrebolApi.getJob(vm.jobId, vm.authType, vm.loggedUser, vm.loggedPassword, function(data) {
       vm.job = data;
+      if(vm.job.Tasks){
+        vm.job.Tasks.forEach(function(item, index){
+          if(item.state === 'READY'){
+            item.sccStyle = 'task-status-ready';
+          }
+          else if(item.state === 'RUNNING'){
+            item.sccStyle = 'task-status-running';
+          }
+          else if(item.state === 'COMPLETED'){
+            item.sccStyle = 'task-status-completed';
+          }
+          else if(item.state === 'FAILED'){
+            item.sccStyle = 'task-status-failed';
+          }
+          else{
+            item.sccStyle = 'task-status-default';
+          }
+        });
+      }
     }, function(error) {
       toastr.error('Error code: ' + error.code + ', Description: ' + error.description, 'Error while trying to fetch tasks of job ID: ' + vm.jobId + '.');
     });
