@@ -1,25 +1,22 @@
 <div class="row">
   <div class="col-sm-8">
     <div class="job-title">
-      {{(Tasks.job.name) ? Tasks.job.name : Tasks.job.id}}
+      {{(job.name) ? job.name : job.id}}
     </div>
   </div>
   <div class="col-sm-4">
-
     <div class="form-group has-feedback">
-      <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputPesquisarStatus" placeholder="Pesquisar..." ng-model="Tasks.search">
+      <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputPesquisarStatus" placeholder="Pesquisar..."
+        ng-model="search">
       <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
       <span id="inputPesquisarStatus" class="sr-only">Termo da pesquisa</span>
     </div>
-
   </div>
 </div>
 
-<div class="tasks" ng-show="Tasks.job.Tasks.length">
-
-  <div class="task" ng-repeat="task in Tasks.job.Tasks | filter:Tasks.search">
+<div class="tasks" ng-show="job.Tasks.length">
+  <div class="task" ng-repeat="task in job.Tasks | filter:search">
     <div class="task-status" ng-class="'task-status-'.concat(task.state.toLowerCase())">{{task.state}}</div>
     {{task.taskid}}
   </div>
-
 </div>

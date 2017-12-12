@@ -13,7 +13,7 @@ html {
 
 body {
 	height: 100%;
-  padding-top: 40px;
+  padding-top: 0px;
   background-color: $background-color;
   color: $gray-base;
 }
@@ -29,12 +29,18 @@ body {
 	height: 100%;
 	margin-bottom: -50px; /* the bottom margin is the negative value of the footer's height */
   padding-bottom: 40px;
+  margin-top: 15px;
 }
 
 .page-wrapper:after {
   content: "";
   display: block;
     height: 50px;
+}
+
+.top-bar {
+  background-color: #f96;
+  height: 30px;
 }
 
 footer {

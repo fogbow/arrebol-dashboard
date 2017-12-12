@@ -7,14 +7,22 @@
  * # TaskCtrl
  * Controller of the ArrebolApp
  */
-angular.module('ArrebolApp')
-  .controller('TasksCtrl', function ($http, $routeParams) {
-    var vm = this;
-    vm.job = {};
-    vm.search = "";
-    vm.jobId = $routeParams.job;
-    $http.get("http://web.cloud.lsd.ufcg.edu.br:42020/api/arrebol/job/"+vm.jobId)
-      .success(function(data) {
-        vm.job = data;
-      });
-  });
+angular.module('ArrebolControllers').controller(
+  'TasksCtrl',
+  function ($scope, $rootScope, $routeParams, TasksService) {
+    
+    $scope.job = undefined;
+    $scope.search = undefined;
+
+    $scope.getTask = function(id) {
+      var successCallback = function(job) {
+        $scope.job = job;
+      };
+      var errorCallback = function(error) {
+        console.log(error);
+      }
+      TasksService.getTask(id, successCallback, errorCallback);
+    };
+    $scope.getTask($routeParams.job);
+  }
+);

@@ -7,13 +7,37 @@
  * # MainCtrl
  * Controller of the ArrebolApp
  */
-angular.module('ArrebolApp')
-  .controller('MainCtrl', function ($http) {
-    var vm = this;
-    vm.jobs = [];
-    vm.search = "";
-    $http.get("http://web.cloud.lsd.ufcg.edu.br:42020/api/arrebol/job")
-      .success(function(data) {
-        vm.jobs = data.Jobs;
-      });
-  });
+angular.module('ArrebolControllers').controller(
+  'MainCtrl',
+  function ($rootScope, $scope, TasksService) {
+
+    $scope.jobs = [];
+    $scope.search = [];
+
+    $scope.updateTaskList = function() {
+      var successCallback = function (data) {
+        $scope.jobs = data.Jobs;
+      };
+      var failCallback = function (error) {
+        console.log(error);
+      };
+      TasksService.getTasksList(successCallback, failCallback);
+    };
+    $scope.updateTaskList();
+
+    $scope.fileChanged = function (element) {
+      Array.from(element.files).forEach(
+        function (jdffile) {
+          var successCallback = function(response) {
+            console.log(jdffile.name + " sent successfully.");
+            $scope.updateTaskList();
+          };
+          var errorCallback = function(error) {
+            console.log(error);
+          };
+          TasksService.uploadFile(jdffile, successCallback, errorCallback);
+        }
+      );
+    }
+  }
+);
