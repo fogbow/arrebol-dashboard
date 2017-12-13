@@ -124,6 +124,22 @@ footer {
   background-color: $brand-success;
 }
 
+.task-actions {
+  width: 120px;
+  float: right;
+  padding: 6px;
+  margin: -11px 15px 0 -17px;
+  border-top-right-radius: $border-radius-base;
+  border-bottom-right-radius: $border-radius-base;
+  color: #FFF;
+  font-weight: bold;
+  border-left: solid 2px $gray-light;
+}
+
+.task-actions .btn{
+  background: none;
+}
+
 .job-title {
   background-color: #000;
   border: 1px solid #000;
@@ -143,4 +159,8 @@ footer {
 .form-control-feedback {
   height: 40px;
   line-height: 40px;
+}
+
+.hideDom {
+  display: none;
 }

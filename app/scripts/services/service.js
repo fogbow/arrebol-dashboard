@@ -1,28 +1,5 @@
 'use strict';
 
-/**
- * @ngdoc service
- * @name ArrebolApp.jobs
- * @description
- * # jobs
- * Factory in the ArrebolApp.
- */
-angular.module('ArrebolApp')
-  .factory('jobs', function () {
-    // Service logic
-    // ...
-
-    var meaningOfLife = 42;
-
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
-    };
-  }
-  );
-
 angular.module('ArrebolServices').service(
   'Session',
   function () {
@@ -56,9 +33,10 @@ angular.module('ArrebolServices').service(
       };
       window.sessionStorage.user = JSON.stringify(session.user);
     };
-    session.createBasicSession = function (userName, login, pass) {
-      console.log('Creating Basic Session');
+    session.createLdapSession = function (userName, login, pass) {
+      console.log('Creating Ldap Session');
       session.user = {
+        authType: 'ldapauth',
         name: userName,
         login: login,
         pass: pass
@@ -107,6 +85,7 @@ angular.module('ArrebolServices').service(
     var authServ = {};
 
     var resourceAuthUrl = appConfig.host + appConfig.userEndpoint;
+    var resourceAuthenticatorUrl = appConfig.host + appConfig.authenticatorEndpoint;
 
     authServ.checkUser = function () {
       var user = Session.getUser();
@@ -122,9 +101,13 @@ angular.module('ArrebolServices').service(
       return user.name;
     }
 
-    authServ.basicSessionLogin = function (userLogin, password, callbackSuccess, callbackError) {
+    authServ.getAuthenticator = function (callbackSuccess, callbackError) {
+      $http.get(resourceAuthenticatorUrl).then(callbackSuccess, callbackError);
+    }
+
+    authServ.ldapSessionLogin = function (userLogin, password, callbackSuccess, callbackError) {
       var userName = userLogin; //For now user name is the login.
-      Session.createBasicSession(userName, userLogin, password);
+      Session.createLdapSession(userName, userLogin, password);
 
       var loginSuccessHandler = function (response) {
         callbackSuccess(response);
@@ -189,7 +172,7 @@ angular.module('ArrebolServices').service(
       NonceService.getNonce(nonceCallback, callbackError);
     };
 
-    tasksService.getTask = function(jobId, callbackSuccess, callbackError) {
+    tasksService.getTask = function (jobId, callbackSuccess, callbackError) {
       var nonceCallback = function (nonce) {
         var successCallback = function (response) {
           callbackSuccess(response.data);
@@ -212,7 +195,7 @@ angular.module('ArrebolServices').service(
       NonceService.getNonce(nonceCallback, callbackError);
     }
 
-    tasksService.uploadFile = function (jdffile, callbackSuccess, callbackError) {
+    tasksService.postJob = function (jdffile, callbackSuccess, callbackError) {
       var nonceCallback = function (nonce) {
         var user = Session.getUser();
         var creds = {
@@ -235,6 +218,32 @@ angular.module('ArrebolServices').service(
           }
         ).then(
           callbackSuccess,
+          callbackError
+          );
+      }
+      NonceService.getNonce(nonceCallback, callbackError);
+    };
+
+    tasksService.deleteJob = function (jobId, callbackSuccess, callbackError) {
+      var nonceCallback = function (nonce) {
+        var user = Session.getUser();
+        var creds = {
+          username: user.name,
+          password: user.pass,
+          nonce: nonce
+        }
+
+        $http.delete(
+          resourceJobUrl + '/' + jobId,
+          {
+            headers: {
+              'X-auth-credentials': JSON.stringify(creds)
+            }
+          }
+        ).then(
+          function(response) {
+            callbackSuccess(response.data); 
+          },
           callbackError
           );
       }

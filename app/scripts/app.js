@@ -19,7 +19,8 @@ var app = angular.module(
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'toastr'
   ]
 );
 
@@ -60,7 +61,8 @@ app.config(
           check: alreadyLoggedIn
         },
         controller: 'AuthCtrl'
-      }).when(
+      }
+    ).when(
       '/tasks',
       {
         templateUrl: 'views/main.html',
@@ -68,7 +70,8 @@ app.config(
           check: checkUser
         },
         controller: 'MainCtrl'
-      }).when(
+      }
+      ).when(
       '/tasks/:job',
       {
         templateUrl: 'views/tasks.html',
@@ -76,7 +79,8 @@ app.config(
           check: checkUser
         },
         controller: 'TasksCtrl'
-      }).otherwise(
+      }
+      ).otherwise(
       {
         redirectTo: '/tasks'
       }

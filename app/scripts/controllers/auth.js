@@ -9,23 +9,45 @@
  */
 angular.module('ArrebolControllers').controller(
   'AuthCtrl',
-  function ($rootScope, $scope, $location, AuthenticationService) {
+  function ($rootScope, $scope, $location, toastr, AuthenticationService) {
 
     $scope.username = undefined;
     $scope.password = undefined;
+    $scope.authType = 'not-refreshed';
 
-    $scope.doLogin = function () {
-      AuthenticationService.basicSessionLogin($scope.username, $scope.password,
-        function () {
-          $location.path('/tasks');
+    $scope.refreshAuthType = function () {
+      AuthenticationService.getAuthenticator(
+        function (auth) {
+          console.log('Authenticator ' + auth.data);
+          $scope.authType = auth.data;
         },
-        function (error) { //Erro call back
-          console.log('Login error: ' + JSON.stringify(error));
+        function (error) {
+          console.log('Couldn\'t reach autheticator.');
         }
-      );
+      )
+    };
+    $scope.refreshAuthType();
+
+    $scope.compareAuthType = function (auth) {
+      return auth === $scope.authType;
     };
 
-    $scope.getUsername = function() {
+    $scope.doLogin = function () {
+      if ($scope.authType === 'commonauth') {
+
+      } else if ($scope.authType === 'ldapauth') {
+        AuthenticationService.ldapSessionLogin($scope.username, $scope.password,
+          function () {
+            $location.path('/tasks');
+          },
+          function (error) { //Erro call back
+            console.log('Login error: ' + JSON.stringify(error));
+          }
+        );
+      }
+    };
+
+    $scope.getUsername = function () {
       return AuthenticationService.getUsername();
     }
 
