@@ -39,7 +39,9 @@ body {
 }
 
 .top-bar {
-  background-color: #f96;
+  background: -moz-linear-gradient(left, #e3a94b 0%, #cc5b4f 100%);
+  background: -webkit-linear-gradient(left, #e3a94b 0%,#cc5b4f 100%);
+  background: linear-gradient(to right, #e3a94b 0%,#cc5b4f 100%);
   height: 30px;
 }
 
@@ -138,6 +140,23 @@ footer {
 
 .task-actions .btn{
   background: none;
+}
+
+.jobs-table {
+  background: #fff;
+  thead {
+    background-color: #ea4;
+  }
+  tfoot {
+    background-color: #e94;
+  }
+  thead, tbody, tfoot {
+    tr {
+      td {
+        padding: 5px;
+      }
+    }
+  }
 }
 
 .job-title {

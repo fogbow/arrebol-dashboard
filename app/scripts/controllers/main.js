@@ -9,7 +9,7 @@
  */
 angular.module('ArrebolControllers').controller(
   'MainCtrl',
-  function ($rootScope, $scope, $uibModal, toastr, TasksService) {
+  function ($rootScope, $scope, $uibModal, $location, toastr, TasksService) {
 
     $scope.jobs = [];
     $scope.search = [];

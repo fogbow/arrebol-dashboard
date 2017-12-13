@@ -27,13 +27,49 @@
     </div>
   </div>
 </div>
-<div class="tasks">
-  <div class="task job" id="container-{{job.id}}" ng-repeat="job in jobs | filter:search">
-      <!-- /#!/tasks/{{job.id}} -->
-    <a href="/#!/tasks/{{job.id}}" class="task-link"> 
-      <div class="task-status task-status-default">{{getStatusString(job)}}</div>
-      {{(job.name) ? job.name : job.id}}
-    </a>
-    <div class="task-actions"><button class="btn btn-sm" ng-click="stopJob(job);">Stop</button></div>
-  </div>
+<div class="table-responsive">
+  <table class="table table-hover col-md-12 jobs-table">
+    <thead>
+      <tr>
+        <td>Status</td>
+        <td>Name</td>
+        <td>Stop job</td>
+      </tr>
+    </thead>
+    <tbody ng-show="jobs.length">
+      <tr ng-repeat="job in jobs | filter:search">
+        <td class="col-md-2">
+          <a ng-href="/#!/tasks/{{job.id}}">
+            <div class="col-md-12">
+              {{getStatusString(job)}}
+            </div>
+          </a>
+        </td>
+        <td class="col-md-9">
+          <a ng-href="/#!/tasks/{{job.id}}">
+            <div class="col-md-12">
+              {{(job.name) ? job.name : job.id}}
+            </div>
+          </a>
+        </td>
+        <td class="col-md-1">
+          <button class="btn btn-sm col-md-12" ng-click="stopJob(job);" align="center">Stop</button>
+        </td>
+      </tr>
+    </tbody>
+    <tbody ng-hide="jobs.length">
+      <tr>
+        <td colspan="3">
+          No jobs to show.
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>Status</td>
+        <td>Name</td>
+        <td>Stop job</td>
+      </tr>
+    </tfoot>
+  </table>
 </div>
