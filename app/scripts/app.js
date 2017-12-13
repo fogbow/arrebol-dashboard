@@ -18,7 +18,8 @@ var app = angular.module(
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap'
   ]
 );
 

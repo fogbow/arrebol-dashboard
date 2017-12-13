@@ -1,7 +1,23 @@
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Submit JDF</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+    <input onchange="angular.element(this).scope().fileChanged(this)" type="file" accept="*" />
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="submitJDF()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="closeModal()">Cancel</button>
+  </div>
+</script>
+<script type="text/ng-template" id="alert.html">
+  <div ng-transclude></div>
+</script>
+<div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" dismiss-on-timeout=10000 close="closeAlert($index)">{{alert.msg}}</div>
 <div class="row">
   <div class="col-sm-8">
     <div>
-      <input onchange="angular.element(this).scope().fileChanged(this)" type="file" accept="*" />
+      <button ng-click="openSubmissionModal()">Submit new JDF</button>
     </div>
   </div>
   <div class="col-sm-4">
