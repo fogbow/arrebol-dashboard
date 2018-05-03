@@ -18,6 +18,10 @@ body {
   color: $gray-base;
 }
 
+.body-img-container {
+  margin-bottom: 20px;
+}
+
 .logo {
   width: 100%;
   margin-bottom: 40px;
@@ -38,11 +42,18 @@ body {
     height: 50px;
 }
 
-.top-bar {
-  background: -moz-linear-gradient(left, #64b5f6 0%, #003c8f 100%);
-  background: -webkit-linear-gradient(left, #64b5f6 0%, #003c8f 100%);
-  background: linear-gradient(to right, #64b5f6 0%, #003c8f 100%);
-  height: 30px;
+.logout-icon {
+  margin-top: 10px;
+  margin-right: 15px;
+}
+.top-bar-upper {
+  background: #0094D9;
+}
+
+.top-bar-bottom {
+  height: 120px;
+  background: url("../images/detalheazul.png") no-repeat top right;
+  background-size: 200px;
 }
 
 footer {
@@ -51,10 +62,7 @@ footer {
   color: #FFF;
   text-align: center;
   font-size: $font-size-small;
-  background: #64b5f6;
-  background: -moz-linear-gradient(left, #64b5f6 0%, #003c8f 100%);
-  background: -webkit-linear-gradient(left, #64b5f6 0%, #003c8f 100%);
-  background: linear-gradient(to right, #64b5f6 0%, #003c8f 100%);
+  background: #0094D9;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e3a94b', endColorstr='#cc5b4f',GradientType=1 );
 
   a {
@@ -145,12 +153,18 @@ footer {
 .jobs-table {
   background: #fff;
   thead {
-    background-color: #ea4;
+    color: #fff;
+    background-color: #6190A3;
   }
-  tfoot {
-    background-color: #e94;
+  tbody {
+    a {
+      &:link,
+      &:visited {
+        color: #6190A3;
+      }
+    }
   }
-  thead, tbody, tfoot {
+  thead, tbody {
     tr {
       td {
         padding: 5px;
